@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"gosample"
 	"net/http"
+	"os"
 )
 
 func IndexHandler(
@@ -15,9 +15,14 @@ func IndexHandler(
 
 func main() {
 	// hello world
-	fmt.Println(gosample.Message)
+	//fmt.Println(gosample.Message)
 
 	// HttpServer
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	fmt.Println(port)
 	http.HandleFunc("/", IndexHandler)
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
