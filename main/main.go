@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
+	"studygo"
 )
 
+// IndexHandler HTTPリクエストを処理する
 func IndexHandler(
 	w http.ResponseWriter,
 	r *http.Request) {
@@ -15,14 +16,10 @@ func IndexHandler(
 
 func main() {
 	// hello world
-	//fmt.Println(gosample.Message)
+	fmt.Println(studygo.ECHO)
+	fmt.Println("this is main")
 
 	// HttpServer
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	fmt.Println(port)
 	http.HandleFunc("/", IndexHandler)
-	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
+	http.ListenAndServe(":3000", nil)
 }

@@ -1,17 +1,29 @@
-# studyGo
+# study Go
 
+### Get Start
 
-### Need to set environment
+1. clone project
+    ```
+    https://github.com/kick0131/studyGo.git
+    ```
+1. go run
+    ```
+    go run ./main/main.go
+    ```
 
-| key | value |
-| ---- | ---- |
-| GOROOT | installed go path |
-| GOPATH | working directory |
-| PATH | execute go path(go.bin,go.exe) |
+- Don't set environment
+
+    | key | value |
+    | ---- | ---- |
+    | GOROOT | installed go path |
+    | GOPATH | use default working directory |
+    | PATH | execute go path(go.bin,go.exe) |
+
 
 ---
-### Execution
-```
-go run ./src/main/main.go
-```
+## Go Commands
+
+### list go package
+    go list -m all
+
 
