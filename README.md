@@ -1,4 +1,5 @@
 # study Go
+Multi module sample
 
 ### Get Start
 
@@ -8,17 +9,10 @@
     ```
 1. go run
     ```
-    go run ./main/main.go
+    go run ./main.go
     ```
-
-- Don't set environment
-
-    | key | value |
-    | ---- | ---- |
-    | GOROOT | installed go path |
-    | GOPATH | use default working directory |
-    | PATH | execute go path(go.bin,go.exe) |
-
+1. stop program
+    ctrl + c
 
 ---
 ## Go Commands
