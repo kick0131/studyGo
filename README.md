@@ -15,9 +15,26 @@ Multi module sample
     ctrl + c
 
 ---
-## Go Commands
+# Go Test
+
+## Simple test
+### Rule
+- filename must be `xxx_test.go`
+- funcformat must be `Testxxxx(t *testing.T)`
+
+## Run test
+
+### all package
+```
+go test -v ./...
+```
+
+# Another Go Commands
 
 ### list go package
-    go list -m all
+`go list -m all`
+
+### Go Doc
+`godoc -http=:(port)`
 
 
