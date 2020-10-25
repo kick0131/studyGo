@@ -7,11 +7,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-
-	gohome "studygo/pkg/go-home"
 	"studygo/pkg/gosample"
-
-	"rsc.io/quote"
 )
 
 // HTTPServer サーバ
@@ -37,8 +33,11 @@ func main() {
 	// hello world
 	// fmt.Println(gosample.Message)
 
-	gosample.HelloWorld()
-	gohome.GoHome()
+	// gosample.HelloWorld()
+	// gohome.GoHome()
+	// gosample.RamdamIntn()
+	fmt.Println(gosample.YearToZodiac(1982))
+	// tourofgo.Tofgo01()
 
-	fmt.Println(quote.Opt())
+	// fmt.Println(quote.Opt())
 }
