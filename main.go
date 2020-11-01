@@ -36,8 +36,9 @@ func main() {
 	// gosample.HelloWorld()
 	// gohome.GoHome()
 	// gosample.RamdamIntn()
-	fmt.Println(gosample.YearToZodiac(1982))
-	// tourofgo.Tofgo01()
+	year := 2005
+	fmt.Printf("year %d zodiac is %s\n", year, gosample.YearToZodiac(year))
+	fmt.Printf("random : %s\n", gosample.RamdamDispZodiac())
 
 	// fmt.Println(quote.Opt())
 }

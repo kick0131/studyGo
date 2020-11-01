@@ -70,8 +70,8 @@ func IndexToZodiac(index int) string {
 		{Index: DOG, Name: "DOG"},
 		{Index: BOAR, Name: "BOAR"},
 	}
-	for i, v := range sercher {
-		fmt.Printf("index:%d value:%s\n", i, v.Name)
+	for _, v := range sercher {
+		// fmt.Printf("index:%d value:%s\n", i, v.Name)
 		if index == v.Index {
 			return v.Name
 		}
@@ -80,9 +80,9 @@ func IndexToZodiac(index int) string {
 }
 
 // RamdamDispZodiac はいずれかの干支をランダムで出力します
-func RamdamDispZodiac() {
+func RamdamDispZodiac() string {
 	rand.Seed(time.Now().UnixNano())
-
+	return IndexToZodiac(rand.Intn(11))
 }
 
 // RamdamIntn はランダムな数字を標準出力します
