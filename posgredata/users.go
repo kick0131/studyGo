@@ -83,7 +83,7 @@ func SampleQuery() {
 	fmt.Println()
 
 	fmt.Println("----- Exec -----")
-	_, err = Db.Exec("INSERT INTO users VALUES ($1, $2, $3, $4, $5, $6)", 100, "1000000000", "hiramatsu2", "hiramatsu2@google.com", "pass", "2020/01/01 12:34:56")
+	_, err = Db.Exec("INSERT INTO users VALUES ($1, $2, $3, $4, $5, $6)", 100, "1000000000", "user2", "user2@google.com", "pass", "2020/01/01 12:34:56")
 	if err != nil {
 		fmt.Printf("== err occured : %s\n", err)
 		return
