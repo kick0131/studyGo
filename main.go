@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 	"studygo/pkg/gosample"
-	"studygo/posgredata"
+	"studygo/pkg/posgredata"
 )
 
 // HTTPServer サーバ

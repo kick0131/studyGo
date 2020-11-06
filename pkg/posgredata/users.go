@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"time"
 
-	// github.com/lib/pq is
 	_ "github.com/lib/pq"
 )
 
