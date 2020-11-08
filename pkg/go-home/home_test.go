@@ -1,6 +1,14 @@
 package gohome
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
+
+func TestGoHome(t *testing.T) {
+	// GoHome()
+	t.Fatal("this method is fatal")
+}
 
 func TestGoHome2(t *testing.T) {
 	tests := []struct {
@@ -16,4 +24,9 @@ func TestGoHome2(t *testing.T) {
 			GoHome2()
 		})
 	}
+}
+
+func ExampleGoHome() {
+	fmt.Println("Hello")
+	// output: Hello
 }

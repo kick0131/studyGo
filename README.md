@@ -42,25 +42,38 @@ ctrl + c
 
 ---
 # Go Test
-
-## Simple test
-### Rule
+Rules
 - filename must be `xxx_test.go`
 - funcformat must be `Testxxxx(t *testing.T)`
 
 ## Run test
+### パッケージ指定
+```
+go test -v studygo/pkg/(pkgname)
+```
 
-### all package
+### 全パッケージ指定
 ```
 go test -v ./...
 ```
 
-# Another Go Commands
+### テスト名指定
 
-### list go package
-`go list -m all`
+正規表現を使用可能
 
-### Go Doc
+```
+例）末尾がsampleのテスト
+go test -run "Sample$"
+```
+
+---
+# Go Doc
 `godoc -http=:(port)`
+
+
+---
+# Another Go Commands
+- list go package
+`go list -m all`
 
 
