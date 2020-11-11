@@ -13,8 +13,8 @@ import (
 // FirestoreEmulatorHost は環境変数名です
 const FirestoreEmulatorHost = "FIRESTORE_EMULATOR_HOST"
 
-// TestMain はエントリポイントです。エミュレータ使用時はtestMainをTestMainに修正が必要です。
-func TestMain(m *testing.M) {
+// AAAA はエントリポイントです。エミュレータ使用時はtestMainをTestMainに修正が必要です。
+func AAAA(m *testing.M) {
 	// command to start firestore emulator
 	cmd := exec.Command("gcloud", "beta", "emulators", "firestore", "start", "--host-port=localhost")
 

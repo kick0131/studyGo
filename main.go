@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 	"studygo/pkg/gosample"
-	"studygo/pkg/posgredata"
+	// "studygo/pkg/posgredata"
 )
 
 // HTTPServer サーバ
@@ -42,7 +42,7 @@ func main() {
 	fmt.Printf("random : %s\n", gosample.RamdamDispZodiac())
 
 	// PostgresQL
-	posgredata.SampleQuery()
+	// posgredata.SampleQuery()
 
 	// fmt.Println(quote.Opt())
 }
