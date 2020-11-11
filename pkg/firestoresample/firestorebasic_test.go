@@ -7,15 +7,19 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+	"time"
 
 	"google.golang.org/api/iterator"
 )
 
 // TestDataSampleA はFirestore動作確認用のマッピング構造体です
 type TestDataSampleA struct {
-	A string `firestore:"first,omitempty"`
-	B string `firestore:"last,omitempty"`
-	C string `firestore:"born,omitempty"`
+	// A string `firestore:"first,omitempty"`
+	// B string `firestore:"last,omitempty"`
+	// C string `firestore:"born,omitempty"`
+	A string `firestore:"first"`
+	B string `firestore:"last"`
+	C int64  `firestore:"born"`
 }
 
 // CredentialData 認証情報のjsonファイルマッピング先となる構造体です（未使用）
@@ -92,6 +96,52 @@ func TestReadFs(t *testing.T) {
 			// return err
 		}
 		fmt.Println(doc.Data())
+	}
+}
+
+func TestReadFsWithStruct(t *testing.T) {
+	fmt.Println("=== CheckPoint ReadFsWithStruct 1")
+
+	var docData TestDataSampleA
+
+	// コレクション内のドキュメント一覧を取得
+	iter := client.fb.Collection("users").Documents(client.ctx)
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			fmt.Println("=== itereator.Done")
+			break
+		}
+		if err != nil {
+			t.Fatalf("document read error\n")
+			// return err
+		}
+		doc.DataTo(&docData)
+		fmt.Println(docData)
+		fmt.Printf("docData.A :%s\n", docData.A)
+		fmt.Printf("docData.B :%s\n", docData.B)
+		fmt.Printf("docData.C :%#v\n", docData.C)
+	}
+}
+
+func TestWriteFsWithStruct(t *testing.T) {
+	fmt.Println("=== CheckPoint WriteFsWithStruct 1")
+
+	// 定義されないフィールドはomitemptyフラグにより生成されない
+	createtime, _ := time.Parse("2006-01-02 15:04:05 MST", "2020-11-11 11:22:33 JST")
+	// loc, _ := time.LoadLocation("Asia/Tokyo")
+	// createtime, _ := time.Now(loc)
+	docData := NoticeInfo{
+		CreateAt: createtime,
+		Title:    "Morning call",
+		Data:     "good morning!!",
+		Dispflag: false,
+	}
+
+	// 書き込み(ドキュメントIDは自動生成)
+	_, err := client.fb.Collection("noticeInfo").NewDoc().Create(client.ctx, docData)
+	if err != nil {
+		t.Fatalf("document Create error\n")
 	}
 }
 
