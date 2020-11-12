@@ -14,9 +14,6 @@ import (
 
 // TestDataSampleA はFirestore動作確認用のマッピング構造体です
 type TestDataSampleA struct {
-	// A string `firestore:"first,omitempty"`
-	// B string `firestore:"last,omitempty"`
-	// C string `firestore:"born,omitempty"`
 	A string `firestore:"first"`
 	B string `firestore:"last"`
 	C int64  `firestore:"born"`
@@ -25,6 +22,58 @@ type TestDataSampleA struct {
 // CredentialData 認証情報のjsonファイルマッピング先となる構造体です（未使用）
 type CredentialData struct {
 	ProjectName string `json:"project_id"`
+}
+
+var docData = NoticeInfo{
+	subCollection: []NoticeInfoSub{
+		NoticeInfoSub{
+			collectionName: "notice_jp",
+			CreateAt:       time.Now(),
+			Title:          "モーニングコール",
+			Data:           "おはよう!!",
+			Dispflag:       false,
+		},
+		NoticeInfoSub{
+			collectionName: "notice_en",
+			CreateAt:       time.Now(),
+			Title:          "Morning call",
+			Data:           "good morning!!",
+			Dispflag:       false,
+		},
+		NoticeInfoSub{
+			collectionName: "notice_vn",
+			CreateAt:       time.Now(),
+			Title:          "cuộc gọi buổi sáng",
+			Data:           "Buổi sáng tốt lành!!",
+			Dispflag:       false,
+		},
+	},
+}
+
+var docData2 = NoticeInfo{
+	subCollection: []NoticeInfoSub{
+		NoticeInfoSub{
+			collectionName: "notice_jp",
+			CreateAt:       time.Now(),
+			Title:          "自分の国",
+			Data:           "日本",
+			Dispflag:       false,
+		},
+		NoticeInfoSub{
+			collectionName: "notice_en",
+			CreateAt:       time.Now(),
+			Title:          "My country",
+			Data:           "America",
+			Dispflag:       false,
+		},
+		NoticeInfoSub{
+			collectionName: "notice_vn",
+			CreateAt:       time.Now(),
+			Title:          "Đất nước của tôi",
+			Data:           "Việt Nam",
+			Dispflag:       false,
+		},
+	},
 }
 
 // JSONPATH はGoogleSDKのサービスアカウントファイルです
@@ -148,28 +197,10 @@ func TestWriteFsWithStruct(t *testing.T) {
 func TestWriteFsSubCollection(t *testing.T) {
 	fmt.Println("=== CheckPoint WriteFsSubCollection 1")
 
-	// コレクション内ドキュメント定義
-	createtime := time.Now()
-	docData := NoticeInfo{
-		subCollection: []NoticeInfoSub{
-			NoticeInfoSub{
-				collectionName: "notice_jp",
-				CreateAt:       createtime,
-				Title:          "モーニングコール",
-				Data:           "おはよう!!",
-				Dispflag:       false,
-			},
-			NoticeInfoSub{
-				collectionName: "notice_en",
-				CreateAt:       createtime,
-				Title:          "Morning call",
-				Data:           "good morning!!",
-				Dispflag:       false,
-			},
-		},
-	}
+	// サブコレクション定義は外部で実装可
 
-	err := docData.Set(client, "noticeInfo")
+	// サブコレクション生成
+	err := docData2.Set(client, "noticeInfo")
 	if err != nil {
 		t.Fatalf("sub-collection Create error\n")
 	}
