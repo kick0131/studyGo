@@ -60,7 +60,7 @@ func setup() {
 }
 
 func shutdown() {
-
+	client.fb.Close()
 }
 
 // TestWriteFs はFirestoreの書き込みテストを行います
@@ -130,8 +130,8 @@ func TestWriteFsWithStruct(t *testing.T) {
 	// 定義されないフィールドはomitemptyフラグにより生成されない
 	createtime, _ := time.Parse("2006-01-02 15:04:05 MST", "2020-11-11 11:22:33 JST")
 	// loc, _ := time.LoadLocation("Asia/Tokyo")
-	// createtime, _ := time.Now(loc)
-	docData := NoticeInfo{
+	// createtime := time.Now()
+	docData := NoticeInfoSub{
 		CreateAt: createtime,
 		Title:    "Morning call",
 		Data:     "good morning!!",
@@ -142,6 +142,36 @@ func TestWriteFsWithStruct(t *testing.T) {
 	_, err := client.fb.Collection("noticeInfo").NewDoc().Create(client.ctx, docData)
 	if err != nil {
 		t.Fatalf("document Create error\n")
+	}
+}
+
+func TestWriteFsSubCollection(t *testing.T) {
+	fmt.Println("=== CheckPoint WriteFsSubCollection 1")
+
+	// コレクション内ドキュメント定義
+	createtime := time.Now()
+	docData := NoticeInfo{
+		subCollection: []NoticeInfoSub{
+			NoticeInfoSub{
+				collectionName: "notice_jp",
+				CreateAt:       createtime,
+				Title:          "モーニングコール",
+				Data:           "おはよう!!",
+				Dispflag:       false,
+			},
+			NoticeInfoSub{
+				collectionName: "notice_en",
+				CreateAt:       createtime,
+				Title:          "Morning call",
+				Data:           "good morning!!",
+				Dispflag:       false,
+			},
+		},
+	}
+
+	err := docData.Set(client, "noticeInfo")
+	if err != nil {
+		t.Fatalf("sub-collection Create error\n")
 	}
 }
 

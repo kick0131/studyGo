@@ -65,6 +65,12 @@ TestXXXXのXXXX部分を正規表現で抽出
 go test -v -run "ReadFs"
 ```
 
+### キャッシュ無しで実行
+エミュレータを使う場合等、キャッシュを使うと書き込みが実行されないので毎回このオプションを付けた方が良い
+```
+go test -v -count=1 ./...
+```
+
 # Another Go Commands
 
 ### list go package
