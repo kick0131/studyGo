@@ -3,6 +3,8 @@ package firestoresample
 import (
 	"fmt"
 	"time"
+
+	"google.golang.org/api/iterator"
 )
 
 // NoticeInfo は通知情報テーブルです
@@ -49,20 +51,27 @@ func (docData *NoticeInfo) GetSubcollectionDoc(client *FireBaseClient, subcollec
 	docData.subCollection = make([]NoticeInfoSub, 0)
 
 	// ドキュメント一覧取得
-	docs, err := client.fb.CollectionGroup(subcollection).
-		Documents(client.ctx).
-		GetAll()
-	if err != nil {
-		var noticeData NoticeInfoSub
-		for _, docsnap := range docs {
-
-			// ドキュメント内容を取得し、戻り値の情報通知構造体に追記
-			err = docsnap.DataTo(&noticeData)
-			if err == nil {
-				return err
-			}
-			docData.subCollection = append(docData.subCollection, noticeData)
+	docs := client.fb.CollectionGroup(subcollection).
+		Documents(client.ctx)
+	var noticeData NoticeInfoSub
+	for {
+		doc, err := docs.Next()
+		if err == iterator.Done {
+			break
 		}
+		if err != nil {
+			return err
+		}
+		fmt.Println(doc.Data())
+
+		// ドキュメント内容を取得し、戻り値の情報通知構造体に追記
+		err = doc.DataTo(&noticeData)
+		if err != nil {
+			return err
+		}
+		fmt.Println(noticeData.Title)
+		docData.subCollection = append(docData.subCollection, noticeData)
 	}
+	fmt.Println("GetSubcollectionDoc success")
 	return nil
 }
