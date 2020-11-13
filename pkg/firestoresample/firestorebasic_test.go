@@ -24,6 +24,7 @@ type CredentialData struct {
 	ProjectName string `json:"project_id"`
 }
 
+// Firestore投入情報（データパターン１）
 var docData = NoticeInfo{
 	subCollection: []NoticeInfoSub{
 		NoticeInfoSub{
@@ -31,25 +32,26 @@ var docData = NoticeInfo{
 			CreateAt:       time.Now(),
 			Title:          "モーニングコール",
 			Data:           "おはよう!!",
-			Dispflag:       false,
+			Dispflag:       true,
 		},
 		NoticeInfoSub{
 			collectionName: "notice_en",
 			CreateAt:       time.Now(),
 			Title:          "Morning call",
 			Data:           "good morning!!",
-			Dispflag:       false,
+			Dispflag:       true,
 		},
 		NoticeInfoSub{
 			collectionName: "notice_vn",
 			CreateAt:       time.Now(),
 			Title:          "cuộc gọi buổi sáng",
 			Data:           "Buổi sáng tốt lành!!",
-			Dispflag:       false,
+			Dispflag:       true,
 		},
 	},
 }
 
+// Firestore投入情報（データパターン２）
 var docData2 = NoticeInfo{
 	subCollection: []NoticeInfoSub{
 		NoticeInfoSub{
@@ -57,21 +59,21 @@ var docData2 = NoticeInfo{
 			CreateAt:       time.Now(),
 			Title:          "自分の国",
 			Data:           "日本",
-			Dispflag:       false,
+			Dispflag:       true,
 		},
 		NoticeInfoSub{
 			collectionName: "notice_en",
 			CreateAt:       time.Now(),
 			Title:          "My country",
 			Data:           "America",
-			Dispflag:       false,
+			Dispflag:       true,
 		},
 		NoticeInfoSub{
 			collectionName: "notice_vn",
 			CreateAt:       time.Now(),
 			Title:          "Đất nước của tôi",
 			Data:           "Việt Nam",
-			Dispflag:       false,
+			Dispflag:       true,
 		},
 	},
 }
@@ -96,7 +98,7 @@ func TestMain(m *testing.M) {
 }
 
 func setup() {
-	// 環境変数を設定し、接続先をFirestoreエミュレータに変更
+	// 有効にした場合、接続先をFirestoreエミュレータに変更する
 	os.Setenv("FIRESTORE_EMULATOR_HOST", "localhost:8080")
 
 	// 認証情報ファイルの絶対パス
@@ -200,9 +202,28 @@ func TestWriteFsSubCollection(t *testing.T) {
 	// サブコレクション定義は外部で実装可
 
 	// サブコレクション生成
-	err := docData2.Set(client, "noticeInfo")
+	err := docData.Set(client, "noticeInfo")
+	err = docData2.Set(client, "noticeInfo")
 	if err != nil {
 		t.Fatalf("sub-collection Create error\n")
+	}
+}
+
+func TestReadFsSubCollection(t *testing.T) {
+	fmt.Println("=== CheckPoint ReadFsSubCollection 1")
+
+	// サブコレクションのデータ取得
+	noticeInfo := NoticeInfo{}
+	err := noticeInfo.GetSubcollectionDoc(client, "notice_jp")
+	if err != nil {
+		t.Fatalf("GetSubcollectionDoc error\n")
+	}
+
+	// 取得内容確認
+	for _, item := range noticeInfo.subCollection {
+		fmt.Printf("title : %s\n", item.Title)
+		fmt.Printf("data  : %s\n", item.Data)
+		fmt.Printf("flag  : %v\n", item.Dispflag)
 	}
 }
 
