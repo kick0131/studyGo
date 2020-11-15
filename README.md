@@ -1,6 +1,9 @@
 # study Go
 Multi module sample
 
+## PJ内の命名規約について
+- ファイル名はスネークケース(xxx_xxx.go)
+
 ## ディレクトリの説明
 - data プログラム以外のデータ格納場所
 - pkg サブパッケージ
@@ -12,6 +15,11 @@ Firestoreへの書き込みとテストコード
 
 【準備】
 1. ディレクトリ内にサービスアカウントファイル(adminsdk.json)を配置
+
+### pkg/disample
+DI(依存性の注入)サンプル
+- adminsdkjson.go adminsdk.jsonの読み書きを題材にしたインタフェース
+- adminsdkjson_test.go DIを使った実装
 
 ### pkg/go-home
 お遊びプログラム
@@ -65,7 +73,7 @@ TestXXXXのXXXX部分を正規表現で抽出
 go test -v -run "ReadFs"
 ```
 
-### キャッシュ無しで実行
+### キャッシュ無しで実行(countオプション)
 エミュレータを使う場合等、キャッシュを使うと書き込みが実行されないので毎回このオプションを付けた方が良い
 ```
 go test -v -count=1 ./...

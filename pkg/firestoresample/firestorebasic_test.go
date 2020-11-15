@@ -27,21 +27,21 @@ type CredentialData struct {
 // Firestore投入情報（データパターン１）
 var docData = NoticeInfo{
 	subCollection: []NoticeInfoSub{
-		NoticeInfoSub{
+		{
 			collectionName: "notice_jp",
 			CreateAt:       time.Now(),
 			Title:          "モーニングコール",
 			Data:           "おはよう!!",
 			Dispflag:       true,
 		},
-		NoticeInfoSub{
+		{
 			collectionName: "notice_en",
 			CreateAt:       time.Now(),
 			Title:          "Morning call",
 			Data:           "good morning!!",
 			Dispflag:       true,
 		},
-		NoticeInfoSub{
+		{
 			collectionName: "notice_vn",
 			CreateAt:       time.Now(),
 			Title:          "cuộc gọi buổi sáng",
@@ -54,21 +54,21 @@ var docData = NoticeInfo{
 // Firestore投入情報（データパターン２）
 var docData2 = NoticeInfo{
 	subCollection: []NoticeInfoSub{
-		NoticeInfoSub{
+		{
 			collectionName: "notice_jp",
 			CreateAt:       time.Now(),
 			Title:          "自分の国",
 			Data:           "日本",
 			Dispflag:       true,
 		},
-		NoticeInfoSub{
+		{
 			collectionName: "notice_en",
 			CreateAt:       time.Now(),
 			Title:          "My country",
 			Data:           "America",
 			Dispflag:       true,
 		},
-		NoticeInfoSub{
+		{
 			collectionName: "notice_vn",
 			CreateAt:       time.Now(),
 			Title:          "Đất nước của tôi",
@@ -150,6 +150,7 @@ func TestReadFs(t *testing.T) {
 	}
 }
 
+// TestReadFsWithStruct はFirestoreから構造体へのマッピングを行います
 func TestReadFsWithStruct(t *testing.T) {
 	fmt.Println("=== CheckPoint ReadFsWithStruct 1")
 
@@ -175,6 +176,7 @@ func TestReadFsWithStruct(t *testing.T) {
 	}
 }
 
+// TestWriteFsWithStruct は構造体からFirestoreへのマッピングを行います
 func TestWriteFsWithStruct(t *testing.T) {
 	fmt.Println("=== CheckPoint WriteFsWithStruct 1")
 
@@ -196,6 +198,7 @@ func TestWriteFsWithStruct(t *testing.T) {
 	}
 }
 
+// TestWriteFsSubCollection はサブコレクションのデータ書き込みを行います
 func TestWriteFsSubCollection(t *testing.T) {
 	fmt.Println("=== CheckPoint WriteFsSubCollection 1")
 
@@ -209,6 +212,7 @@ func TestWriteFsSubCollection(t *testing.T) {
 	}
 }
 
+// TestReadFsSubCollection はサブコレクションのデータ取得を行います
 func TestReadFsSubCollection(t *testing.T) {
 	fmt.Println("=== CheckPoint ReadFsSubCollection 1")
 
