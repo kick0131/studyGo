@@ -2,24 +2,26 @@
 Multi module sample
 
 ## ディレクトリの説明
-- pkg サブパッケージ
 - data プログラム以外のデータ格納場所
+- pkg サブパッケージ
 
-### firestoresample
+### pkg/firestoresample
 Firestoreへの書き込みとテストコード
 - firestorebasic.go 読み書き基本コード
-- firestoreemulate.go Firestoreエミュレータを使ったサンプル
+- firestoreemulate.go Firestoreエミュレータを使ったサンプル（未完成）
 
 【準備】
 1. ディレクトリ内にサービスアカウントファイル(adminsdk.json)を配置
+
+### pkg/go-home
+お遊びプログラム
 
 ### pkg/gosample
 サブパッケージの動作確認用
 - zodiac.go ランダムで干支を返すプログラム
 
-### posgredata
+### pkg/posgredata
 PostgreSQLへの書き込み
-
 - users.go usersテーブルへの読み書き基本コード
 
 
@@ -42,22 +44,32 @@ ctrl + c
 
 ---
 # Go Test
-Rules
+
+### Rule
 - filename must be `xxx_test.go`
 - funcformat must be `Testxxxx(t *testing.T)`
 
-## Run test
-### パッケージ指定
-```
-go test -v studygo/pkg/(pkgname)
-```
-
-### 全パッケージ指定
+### 全パッケージ実行
 ```
 go test -v ./...
 ```
 
-### テスト名指定
+### 特定のパッケージ実行
+```
+go test -v studygo/pkg/firestoresample
+```
+
+### 指定したテストメソッド実行
+TestXXXXのXXXX部分を正規表現で抽出
+```
+go test -v -run "ReadFs"
+```
+
+### キャッシュ無しで実行
+エミュレータを使う場合等、キャッシュを使うと書き込みが実行されないので毎回このオプションを付けた方が良い
+```
+go test -v -count=1 ./...
+```
 
 正規表現を使用可能
 
