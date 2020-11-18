@@ -17,6 +17,7 @@ package gosample
 
 import (
 	"fmt"
+	"unicode/utf8"
 
 	"github.com/common-nighthawk/go-figure"
 )
@@ -42,4 +43,17 @@ func HelloWorld() {
 func SampleFunctionForTest() string {
 	fmt.Println("hoge")
 	return "huga"
+}
+
+// GetAllASCII はGo言語で全アスキーコードの出力を行い、文字列を返す実験メソッドです
+func GetAllASCII() string {
+	// 文字アクセスにはコードポイントを扱うrune型を使う
+	loop := 127 // 0x7FまでがASCIIコード
+	var value []rune
+	for loop > 0 {
+		value = append(value, rune(loop))
+		loop--
+	}
+	fmt.Println(utf8.RuneCountInString(string(value)))
+	return string(value)
 }

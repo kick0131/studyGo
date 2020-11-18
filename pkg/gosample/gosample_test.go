@@ -32,3 +32,10 @@ func Example() {
 	fmt.Println("hello")
 	// Output: hello
 }
+
+func TestGetAllASCII(t *testing.T) {
+	assert := assert.New(t)
+	result := GetAllASCII()
+	fmt.Println(result)
+	assert.NotEmpty(result)
+}
