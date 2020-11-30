@@ -14,23 +14,26 @@ import (
 // お試しテスト
 func TestHelloWorld(t *testing.T) {
 	assert := assert.New(t)
-	result := SampleFunctionForTest()
-	t.Error("this is Error code")
-	fmt.Println(result)
-	assert.Equal(result, "hoge", "they should be equal")
-}
 
-func TestHelloWorld2(t *testing.T) {
-	assert := assert.New(t)
-	result := SampleFunctionForTest()
-	t.Error("this is Success code")
-	fmt.Println(result)
-	assert.Equal(result, "huga", "they should be equal")
+	// 期待値
+	expectResult := "ABCDE"
+
+	// モックで動きを変える
+	mock := new(MockGoSample)
+	mock.On("SubFuncHello").Return(expectResult)
+
+	// テスト実行
+	// 本来の動作は上、モックに置き換えたものが下
+	// result := SampleFunctionForTest(&SimpleStruct{})
+	result := SampleFunctionForTest(mock)
+
+	// 結果確認
+	assert.Equal(expectResult, result)
 }
 
 func Example() {
 	fmt.Println("hello")
-	// Output: hello
+	// Output: SubFuncHello
 }
 
 func TestGetAllASCII(t *testing.T) {

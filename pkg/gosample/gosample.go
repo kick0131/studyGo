@@ -28,6 +28,14 @@ var Foo = "fooooo"
 // BAR は定数
 const BAR = "BAAAAA"
 
+// SimpleIf はシンプルなインタフェース定義です
+type SimpleIf interface {
+	SubFuncHello() string
+}
+
+// SimpleStruct はシンプルな構造体です
+type SimpleStruct struct{}
+
 // HelloWorld figureモジュールを使った文字列出力
 //
 // Info
@@ -40,9 +48,17 @@ func HelloWorld() {
 }
 
 // SampleFunctionForTest go test(Example)のための関数
-func SampleFunctionForTest() string {
-	fmt.Println("hoge")
-	return "huga"
+func SampleFunctionForTest(inter SimpleIf) string {
+	msg := "SampleFunctionForTest"
+	fmt.Println(msg)
+	return inter.SubFuncHello()
+}
+
+// SubFuncHello モック
+func (SimpleStruct) SubFuncHello() string {
+	msg := "SubFuncHello"
+	fmt.Println(msg)
+	return msg
 }
 
 // GetAllASCII はGo言語で全アスキーコードの出力を行い、文字列を返す実験メソッドです
