@@ -17,6 +17,7 @@ package gosample
 
 import (
 	"fmt"
+	"log"
 	"unicode/utf8"
 
 	"github.com/common-nighthawk/go-figure"
@@ -54,7 +55,7 @@ func SampleFunctionForTest(inter SimpleIf) string {
 	return inter.SubFuncHello()
 }
 
-// SubFuncHello モック
+// SubFuncHello モック化対象インタフェース実装
 func (SimpleStruct) SubFuncHello() string {
 	msg := "SubFuncHello"
 	fmt.Println(msg)
@@ -72,4 +73,10 @@ func GetAllASCII() string {
 	}
 	fmt.Println(utf8.RuneCountInString(string(value)))
 	return string(value)
+}
+
+// DoPrintLog logの出力先変更のお試しコード
+func DoPrintLog() {
+	msg := "DoPrintLog"
+	log.Println(msg)
 }
