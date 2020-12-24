@@ -5,31 +5,13 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"os"
 	"studygo/pkg/gosample"
+	"studygo/pkg/httpserver"
 	// "studygo/pkg/posgredata"
 )
 
-// HTTPServer サーバ
-func HTTPServer() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	fmt.Println(port)
-	http.HandleFunc("/", IndexHandler)
-	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
-}
-
-// IndexHandler リクエストハンドラ
-func IndexHandler(
-	w http.ResponseWriter,
-	r *http.Request) {
-
-	fmt.Fprint(w, "hello world")
-}
-
+// パッケージを使うものだけ記載する
+// 単に動かすだけならパッケージ内のテストコードから呼び出す
 func main() {
 	// hello world
 	// fmt.Println(gosample.Message)
@@ -45,4 +27,5 @@ func main() {
 	// posgredata.SampleQuery()
 
 	// fmt.Println(quote.Opt())
+	httpserver.HTTPServer()
 }

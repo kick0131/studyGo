@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-main>
+          <v-form v-model="valid">
+            <v-container>
+              <v-row>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="username"
+                    :rules="nameRules"
+                    :counter="10"
+                    label="ユーザ名"
+                    required
+                  ></v-text-field>
+                </v-col>
+
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="memo"
+                    :rules="emailRules"
+                    label="メモ"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-btn class="mr-4" @click="submit"> submit </v-btn>
+            </v-container>
+          </v-form>
+        </v-main>
+      </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+        methods: {
+          submit: function () {
+            alert("submit button pushed!!");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

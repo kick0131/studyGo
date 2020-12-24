@@ -10,7 +10,6 @@ require (
 	github.com/stretchr/testify v1.4.0
 	golang.org/x/tools v0.0.0-20201023174141-c8cfbd0f21e6 // indirect
 	google.golang.org/api v0.34.0
-	studygo/pkg/go-home v0.0.0-00010101000000-000000000000 // indirect
 )
 
 replace studygo/pkg/go-home => ./pkg/go-home

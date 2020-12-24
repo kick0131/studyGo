@@ -32,6 +32,10 @@ DI(依存性の注入)サンプル
 PostgreSQLへの書き込み
 - users.go usersテーブルへの読み書き基本コード
 
+### pkg/httpserver
+goでHTTPサーバ
+- http/templateを使ってHTMLファイルを出力させる
+- VuetifyライブラリをCDN経由で使用
 
 ## 方針
 動かすだけであればmain()が無くてもテストコードを用意してgo testを実行すれば良いので、実行モジュールを作る用途が無ければ、テストコードをエントリポイントとする。
