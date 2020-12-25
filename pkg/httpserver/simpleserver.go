@@ -16,6 +16,7 @@ func HTTPServer() {
 	}
 	fmt.Println(port)
 	http.HandleFunc("/", IndexHandler)
+	http.HandleFunc("/setupsi", IndexHandler)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
 
@@ -35,4 +36,29 @@ func IndexHandler(
 	} else {
 		fmt.Fprintf(w, "POSTはダメよ")
 	}
+}
+
+// setupSIHandler リクエストハンドラ
+func setupSIHandler(
+	w http.ResponseWriter,
+	r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Fatalf("ParseForm error: %v", err)
+	}
+	// Destination はデプロイ先環境名です
+	var Destination string
+	// FrontEndHost はフロントエンドのホストアドレスです
+	var FrontEndHost string
+	// BackEndHost はバックエンドAPIのホストアドレスです
+	var BackEndHost string
+
+	Destination = r.Form.Get("dstmode")
+	FrontEndHost = r.Form.Get("FrontEndHost")
+	BackEndHost = r.Form.Get("BackEndHost")
+
+	fmt.Printf("Destination     : %s¥n", Destination)
+	fmt.Printf("FrontEndHost     : %s¥n", FrontEndHost)
+	fmt.Printf("BackEndHost     : %s¥n", BackEndHost)
+
 }

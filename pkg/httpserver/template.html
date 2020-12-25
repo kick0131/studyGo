@@ -22,29 +22,25 @@
     <div id="app">
       <v-app>
         <v-main>
-          <v-form v-model="valid">
+          <v-form action="/setupsi" method="post">
             <v-container>
               <v-row>
-                <v-col cols="12" md="4">
-                  <v-text-field
-                    v-model="username"
-                    :rules="nameRules"
-                    :counter="10"
-                    label="ユーザ名"
-                    required
-                  ></v-text-field>
+                <v-col cols="12" md="12">
+                  <v-radio-group row>
+                    <v-radio label="開発" name="dstmode" value="開発"></v-radio>
+                    <v-radio label="テスト"  name="dstmode" value="テスト"></v-radio>
+                    <v-radio label="検証"  name="dstmode" value="検証"></v-radio>
+                    <v-radio label="本番"  name="dstmode" value="開発"></v-radio>
+                  </v-radio-group>
                 </v-col>
-
-                <v-col cols="12" md="4">
-                  <v-text-field
-                    v-model="memo"
-                    :rules="emailRules"
-                    label="メモ"
-                    required
-                  ></v-text-field>
+                <v-col cols="12" md="12">
+                  <v-text-field name="FrontEndHost" label="管理コンソールホスト名" required />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <v-text-field name="BackEndHost" label="バックエンドホスト名" required />
                 </v-col>
               </v-row>
-              <v-btn class="mr-4" @click="submit"> submit </v-btn>
+              <v-btn class="mr-4" type="submit" > submit </v-btn>
             </v-container>
           </v-form>
         </v-main>
@@ -57,11 +53,6 @@
       new Vue({
         el: "#app",
         vuetify: new Vuetify(),
-        methods: {
-          submit: function () {
-            alert("submit button pushed!!");
-          },
-        },
       });
     </script>
   </body>
