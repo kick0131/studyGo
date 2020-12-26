@@ -16,7 +16,7 @@ func HTTPServer() {
 	}
 	fmt.Println(port)
 	http.HandleFunc("/", IndexHandler)
-	http.HandleFunc("/setupsi", IndexHandler)
+	http.HandleFunc("/setupsi", setupSIHandler)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
 
@@ -46,19 +46,23 @@ func setupSIHandler(
 	if err != nil {
 		log.Fatalf("ParseForm error: %v", err)
 	}
-	// Destination はデプロイ先環境名です
-	var Destination string
-	// FrontEndHost はフロントエンドのホストアドレスです
-	var FrontEndHost string
-	// BackEndHost はバックエンドAPIのホストアドレスです
-	var BackEndHost string
 
-	Destination = r.Form.Get("dstmode")
-	FrontEndHost = r.Form.Get("FrontEndHost")
-	BackEndHost = r.Form.Get("BackEndHost")
+	// Destination はラジオボタンで選択したデプロイ先環境名です
+	Destination := r.Form.Get("dstmode")
+	// FrontEndHost はテキストフィールドのフロントエンドホストアドレスです
+	FrontEndHost := r.Form.Get("FrontEndHost")
+	// BackEndHost はテキストフィールドのバックエンドホストアドレスです
+	BackEndHost := r.Form.Get("BackEndHost")
+	// Emails はテキストエリアのメールアドレスです（セパレータはカンマ）
+	Emails := r.Form.Get("Emails")
 
-	fmt.Printf("Destination     : %s¥n", Destination)
-	fmt.Printf("FrontEndHost     : %s¥n", FrontEndHost)
-	fmt.Printf("BackEndHost     : %s¥n", BackEndHost)
+	fmt.Printf("Destination    : %s\n", Destination)
+	fmt.Printf("FrontEndHost   : %s\n", FrontEndHost)
+	fmt.Printf("BackEndHost    : %s\n", BackEndHost)
+	fmt.Printf("Emails         : %s\n", Emails)
+
+	fmt.Fprintf(w, fmt.Sprintf("Destination  : %s\r\n", Destination))
+	fmt.Fprintf(w, fmt.Sprintf("FrontEndHost : %s\r\n", FrontEndHost))
+	fmt.Fprintf(w, fmt.Sprintf("BackEndHost  : %s\r\n", BackEndHost))
 
 }

@@ -34,10 +34,13 @@
                   </v-radio-group>
                 </v-col>
                 <v-col cols="12" md="12">
-                  <v-text-field name="FrontEndHost" label="管理コンソールホスト名" required />
+                  <v-text-field name="FrontEndHost" label="フロントエンドホスト名" required />
                 </v-col>
                 <v-col cols="12" md="12">
                   <v-text-field name="BackEndHost" label="バックエンドホスト名" required />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <v-textarea name="Emails" label="メールアドレス" required />
                 </v-col>
               </v-row>
               <v-btn class="mr-4" type="submit" > submit </v-btn>
