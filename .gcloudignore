@@ -1,4 +1,4 @@
-studygo.exe
+.git
+
 data/*.json
-studygo
 cloudbuild.yaml

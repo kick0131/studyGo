@@ -45,6 +45,18 @@ goでHTTPサーバ
 - CloudRunにデプロイして実行させる場合
 - 開発環境以外の場所で実行させる場合
 
+## トラブルシュート
+- .gcloudignoreがないと、Dockerで.gitignoreのファイルが対象外になる
+
+- CloudRunへのデプロイは専用のRoleが必要
+
+    `https://phpnews.io/feeditem/google-cloud-build-google-cloud-run-fixing-error-gcloud-run-deploy-permission-denied-the-caller-does-not-have-permission`
+
+    ```
+    run.services.create and run.services.update on the project level. Typically assigned through the roles/run.admin role.
+    iam.serviceAccounts.actAs for the Cloud Run runtime service account. By default, this is PROJECT_NUMBER-compute@developer.gserviceaccount.com. The permission is typically assigned through the roles/iam.serviceAccountUser role.
+    ```
+
 ### execute program
 ```
 go run ./main.go
@@ -94,6 +106,15 @@ go test -run "Sample$"
 # Go Doc
 `godoc -http=:(port)`
 
+---
+# Deploy to Cloud Run
+prepaire
+- make cloudbuild.yaml at root directory
+
+deploy (use cloudbuild.yaml)
+```
+cloud run deploy
+```
 
 ---
 # Another Go Commands
