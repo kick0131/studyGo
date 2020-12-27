@@ -41,7 +41,7 @@ ARG LOCAL_WORKDIR
 WORKDIR ${LOCAL_WORKDIR}
 
 # 「ステージ１」で生成された実行ファイルをこの新しいステージへコピー
-COPY --from=0 ${LOCAL_WORKDIR}${BINFILE} .
+COPY --from=0 ${LOCAL_WORKDIR} .
 
 # ポート番号を指定
 ENV PORT 8080
