@@ -13,19 +13,19 @@ import (
 // パッケージを使うものだけ記載する
 // 単に動かすだけならパッケージ内のテストコードから呼び出す
 func main() {
-	// hello world
-	// fmt.Println(gosample.Message)
 
-	// gosample.HelloWorld()
+	// == pkg/gohome
 	// gohome.GoHome()
-	// gosample.RamdamIntn()
+
+	// == pkg/gosample
 	year := 2005
 	fmt.Printf("year %d zodiac is %s\n", year, gosample.YearToZodiac(year))
 	fmt.Printf("random : %s\n", gosample.RamdamDispZodiac())
 
-	// PostgresQL
-	// posgredata.SampleQuery()
-
-	// fmt.Println(quote.Opt())
+	// == pkg/httpserver
 	httpserver.HTTPServer()
+
+	// == pkg/posgredata
+	// posgredata.SampleQuery()
+	// fmt.Println(quote.Opt())
 }

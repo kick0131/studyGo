@@ -111,9 +111,8 @@ go test -run "Sample$"
 prepaire
 - make cloudbuild.yaml at root directory
 
-deploy (use cloudbuild.yaml)
 ```
-cloud run deploy
+gcloud builds submit
 ```
 
 ---

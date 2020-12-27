@@ -12,8 +12,8 @@
 # golangのビルド用にgolang-alpine でDockerイメージ(コンテナで利用するファイル・設定)を作成
 ARG GO_VERSION=1.15
 ARG ALPINE_VERSION=latest
-ARG BINFILE=studygo
-ARG LOCAL_WORKDIR=localwork/
+ARG BINFILE=main
+ARG LOCAL_WORKDIR=/usr/local/
 
 FROM golang:${GO_VERSION}-alpine AS builder
 # [Golang]$GOPATH/go.mod exists but should notを回避する
@@ -24,34 +24,28 @@ ARG LOCAL_WORKDIR
 
 WORKDIR ${LOCAL_WORKDIR}
 
-# カレントディレクトリをコンテナの「/go/src/hello-app」へ追加
-# ADD . /go/src/hello-app
 # カレントディレクトリをコンテナの${LOCAL_WORKDIR}へ追加
 ADD . .
-RUN pwd
-RUN ls -la
 
 # hello-appの実行ファイルを生成
 ARG CGO_ENABLED=0
 ARG GOOS="linux" 
-RUN go build -o /go/bin/main
+RUN go build -o ${LOCAL_WORKDIR}${BINFILE}
 
 # ステージ２
 # Alpine Linux(セキュアで軽量な Linux ディストリビューション)ベースでDockerイメージを作成
 FROM alpine:${ALPINE_VERSION}
-ARG  BINFILE
+ARG BINFILE
 ARG LOCAL_WORKDIR
 
-WORKDIR /root/
+WORKDIR ${LOCAL_WORKDIR}
 
 # 「ステージ１」で生成された実行ファイルをこの新しいステージへコピー
-# COPY --from=builder /go/bin/${BINFILE} .
-# COPY --from=builder ${LOCAL_WORKDIR}${BINFILE} .
-COPY --from=0 /go/bin/main .
+COPY --from=0 ${LOCAL_WORKDIR}${BINFILE} .
 
 # ポート番号を指定
 ENV PORT 8080
 
 # コンテナ内で実行するコマンドで実行ファイルを実行
-# CMD ["./${BINFILE}"]
-ENTRYPOINT ["/root/main"]
+# 注：ARG変数は使えない
+ENTRYPOINT ["/usr/local/main"]

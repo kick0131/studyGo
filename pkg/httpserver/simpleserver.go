@@ -28,7 +28,7 @@ func IndexHandler(
 	fmt.Println("method:", r.Method) //リクエストを取得するメソッド
 	if r.Method == "GET" {
 		// テンプレートの内容を出力する
-		t, err := template.ParseFiles("pkg/httpserver/template.html")
+		t, err := template.ParseFiles("./pkg/httpserver/template.html")
 		if err != nil {
 			log.Fatalf("template error: %v", err)
 		}
