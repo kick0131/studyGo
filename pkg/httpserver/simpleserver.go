@@ -34,7 +34,7 @@ func IndexHandler(
 		}
 		t.Execute(w, nil)
 	} else {
-		fmt.Fprintf(w, "POSTはダメよ")
+		fmt.Fprintf(w, "HTTP Getメソッドを使ってください")
 	}
 }
 

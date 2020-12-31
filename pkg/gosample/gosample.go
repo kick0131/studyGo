@@ -80,3 +80,22 @@ func DoPrintLog() {
 	msg := "DoPrintLog"
 	log.Println(msg)
 }
+
+// ExforSample 拡張for文のサンプル
+func ExforSample() {
+	type StudentInfo struct {
+		name string
+		age  int
+	}
+
+	students := []StudentInfo{
+		{"sum", 10},
+		{"bob", 18},
+		{"mary", 24},
+	}
+
+	// rangeの1要素ずつループさせる構文(foreachと同等)
+	for idx, item := range students {
+		log.Println(fmt.Sprintln("[", idx, "] name:", item.name, "age:", item.age))
+	}
+}

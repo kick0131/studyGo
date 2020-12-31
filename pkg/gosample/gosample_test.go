@@ -36,10 +36,11 @@ func TestHelloWorld(t *testing.T) {
 }
 
 func Example() {
-	fmt.Println("hello")
+	fmt.Println("SubFuncHello")
 	// Output: SubFuncHello
 }
 
+// なにかしら値が入っていればOKとし、中身の評価はスキップ
 func TestGetAllASCII(t *testing.T) {
 	assert := assert.New(t)
 	result := GetAllASCII()
@@ -80,4 +81,9 @@ func TestPrintLog(t *testing.T) {
 
 	// 結果確認
 	assert.Equal(expectResult, actual)
+}
+
+// 評価しないで単に実行するだけ
+func TestExforSample(t *testing.T) {
+	ExforSample()
 }

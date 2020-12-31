@@ -27,6 +27,7 @@ DI(依存性の注入)サンプル
 ### pkg/gosample
 サブパッケージの動作確認用
 - zodiac.go ランダムで干支を返すプログラム
+- ゴルーチンの勉強(`https://note.crohaco.net/2019/golang-goroutine/`)
 
 ### pkg/posgredata
 PostgreSQLへの書き込み
