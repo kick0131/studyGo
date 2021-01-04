@@ -83,7 +83,56 @@ func TestPrintLog(t *testing.T) {
 	assert.Equal(expectResult, actual)
 }
 
-// 評価しないで単に実行するだけ
+// ExforSample 拡張for文のサンプル
 func TestExforSample(t *testing.T) {
-	ExforSample()
+	type StudentInfo struct {
+		name string
+		age  int
+	}
+
+	students := []StudentInfo{
+		{"sum", 10},
+		{"bob", 18},
+		{"mary", 24},
+	}
+
+	// rangeの1要素ずつループさせる構文(foreachと同等)
+	for idx, item := range students {
+		log.Println(fmt.Sprintln("[", idx, "] name:", item.name, "age:", item.age))
+	}
+
+}
+
+// 文字列セパレート
+// go test -v -run "TestSepalate" -count=1 ./pkg/gosample/.
+func TestSepalateSample(t *testing.T) {
+	assert := assert.New(t)
+
+	// 変換元
+	emails := []string{
+		"user1@sample.com",
+		"hoge@fuga.co.jp",
+		"ABCDE@F.G.H.I",
+	}
+
+	// 変換元文字列のカンマ結合
+	emailStr := ""
+	for i, item := range emails {
+		if i == 0 {
+			emailStr = item
+		} else {
+			emailStr += ("," + item)
+		}
+	}
+	log.Println(emailStr)
+
+	// カンマ結合した文字列の分割
+	actual := []string{}
+	slice := strings.Split(emailStr, ",")
+	for _, item := range slice {
+		actual = append(actual, strings.TrimSpace(item))
+	}
+
+	// 元の文字配列と比較
+	assert.Equal(emails, actual)
 }
