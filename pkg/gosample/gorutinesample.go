@@ -1,6 +1,10 @@
 package gosample
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
 // SimpleGorutine01 はゴルーチンとチャネルの基本的な使用例です
 func (*SimpleStruct) SimpleGorutine01() {
@@ -46,4 +50,18 @@ func (*SimpleStruct) SimpleGorutine02() {
 	fmt.Println("cap:", cap(ch2), " len:", len(ch2))
 
 	fmt.Println("ch1:", <-ch1, " ch2:", <-ch2)
+}
+
+// SleepMethodGorutine は呼び出し側でも並列処理で呼ばれることを想定した並列処理を行うメソッドです
+func (*SimpleStruct) SleepMethodGorutine() {
+	var wg sync.WaitGroup
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			time.Sleep(time.Second * 1)
+		}()
+	}
+	wg.Wait()
+	fmt.Println("end")
 }
