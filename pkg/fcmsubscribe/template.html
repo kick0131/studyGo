@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-main>
+          <v-form ref="form">
+            <v-container>
+              <v-row>
+                <v-col cols="12" md="12">
+                  <v-text-field name="TokenID" label="トークンID" v-model.lazy="tokenid" required />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <v-text-field name="Topic" label="トピック名" v-model.lazy="topicname" equired />
+                </v-col>
+              </v-row>
+              <v-btn rounded color="primary" class="mr-4" @click="subscribe"> subscribe </v-btn>
+              <v-btn rounded color="primary" class="mr-4" @click="unsubscribe" > unsubscribe </v-btn>
+            </v-container>
+          </v-form>
+        </v-main>
+      </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+        data: function(){
+          return {
+            tokenid : "",
+            topicname : "",
+          }
+        },
+        methods: {
+          subscribe: function(){
+            console.log('subscribe called')
+            console.log('TokenID : ', this.tokenid)
+            console.log('Topic : ', this.topicname)
+            // Use application/x-www-form-urlencoded
+            // let params = new URLSearchParams();
+            // params.append('TokenID',this.tokenid);
+            // params.append('Topic',this.topicname);
+
+            // Use application/json
+            const json = JSON.stringify({ 
+              TokenID: this.tokenid,
+              Topic: this.topicname,
+            });
+
+            // Http Req
+            axios.post('/subscribe',json, {
+              headers: {
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/json'
+              }})
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
+          },
+          unsubscribe: function(){
+            console.log('unsubscribe called')
+            const json = JSON.stringify({ 
+              TokenID: this.tokenid,
+              Topic: this.topicname,
+            });
+
+            // Http Req
+            axios.post('/unsubscribe',json, {
+              headers: {
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/json'
+              }})
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
+
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

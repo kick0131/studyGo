@@ -5,14 +5,17 @@ package main
 
 import (
 	"fmt"
+	"studygo/pkg/fcmsubscribe"
 	"studygo/pkg/gosample"
-	"studygo/pkg/httpserver"
 	// "studygo/pkg/posgredata"
 )
 
 // パッケージを使うものだけ記載する
 // 単に動かすだけならパッケージ内のテストコードから呼び出す
 func main() {
+
+	// == pkg/fcmsubscribe
+	fcmsubscribe.HTTPServer()
 
 	// == pkg/gohome
 	// gohome.GoHome()
@@ -23,7 +26,7 @@ func main() {
 	fmt.Printf("random : %s\n", gosample.RamdamDispZodiac())
 
 	// == pkg/httpserver
-	httpserver.HTTPServer()
+	// httpserver.HTTPServer()
 
 	// == pkg/posgredata
 	// posgredata.SampleQuery()
