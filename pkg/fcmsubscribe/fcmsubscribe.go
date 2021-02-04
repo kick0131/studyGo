@@ -34,7 +34,7 @@ func IndexHandler(
 	// fmt.Println("method:", r.Method) //リクエストを取得するメソッド
 	if r.Method == "GET" {
 		// テンプレートの内容を出力する
-		t, err := template.ParseFiles("./pkg/fcmpush/template.html")
+		t, err := template.ParseFiles("./pkg/fcmsubscribe/template.html")
 		if err != nil {
 			log.Fatalf("template error: %v", err)
 		}
@@ -152,4 +152,5 @@ func unsubscribeHandler(
 	}
 	fmt.Fprintf(w, "Successfly %v\n", result)
 
+	w.WriteHeader(http.StatusOK)
 }
